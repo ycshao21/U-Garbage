@@ -25,13 +25,15 @@ conda install tensorboardX
 
 Download the dataset [Garbage Classification (12 classes)](https://www.kaggle.com/datasets/mostafaabla/garbage-classification/data) by Mostafa Mohamed from Kaggle, and unzip it under `data/`.
 
+Preprocess the dataset:
+```bash
+python utils/preprocess.py
+```
+
 To train the model, modify `configs/train.yaml` and run:
 ```bash
 python train_vgg.py --name <name>
 ```
-The best model will be saved as `checkpoints/<name>_<timestamp>/model.pth`.
-Tensorboard log directory is `runs/`.
-Log history is written to `logs/`.
 
 To test the model, modify `configs/train.yaml` and run:
 ```bash

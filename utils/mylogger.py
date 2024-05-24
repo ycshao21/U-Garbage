@@ -3,6 +3,7 @@ from typing import override
 
 from ruamel.yaml import YAML
 import json
+from pathlib import Path
 
 import logging
 import logging.config
@@ -154,6 +155,9 @@ def setup(config_path):
     except FileNotFoundError:
         raise FileNotFoundError(f"Config file not found at \"{config_path}\".")
     
+    # Create the "logs" directory if it does not exist
+    Path("logs").mkdir(exist_ok=True)
+
     # Logging files are stored in "logs" directory
     try:
         logging.config.dictConfig(config)

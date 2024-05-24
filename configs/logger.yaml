@@ -34,7 +34,7 @@ handlers:
         class: logging.handlers.RotatingFileHandler
         level: DEBUG
         formatter: json
-        filename: logs/log_history_cbam.jsonl
+        filename: logs/log_history.jsonl
         maxBytes: 5242880  # If file size exceeds 5MB, it will be rotated
         backupCount: 40  # Keep 40 log files
         encoding: utf8
