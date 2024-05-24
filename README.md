@@ -1,5 +1,8 @@
 # U-Garbage
 A garbage sorting model using VGG16, Residual Blocks, and Convolutional Block Attention Module, implemented in PyTorch.
+<div align=center>
+    <img src='docs/architecture.png'></img>
+</div>
 
 ## How to get started
 Clone the repository:
