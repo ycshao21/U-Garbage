@@ -1,0 +1,16 @@
+train:
+  num_epochs: 100
+  batch_size: 128
+  lr: 0.002
+  weight_decay: 0.0001
+  use_cbam: True
+  use_residual: False
+  save_dir: ./checkpoints
+  test_after_train: True 
+
+test:
+  batch_size: 32
+  model_path: ./checkpoints/vgg16/model.pth
+  use_cbam: False
+  use_residual: False
+  plot_cm: True

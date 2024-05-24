@@ -1,0 +1,52 @@
+version: 1
+disable_existing_loggers: False
+filters:
+    non_error:
+        (): utils.mylogger.NonErrorFilter
+formatters:
+    standard:
+        format: "[%(levelname)s | %(module)s | L%(lineno)d] %(asctime)s: %(message)s"
+        datefmt: "%Y-%m-%dT%H:%M:%S%z"
+    json:
+        (): utils.mylogger.JSONFormatter
+        fmt_keys:
+            level: levelname
+            message: message
+            timestamp: timestamp
+            logger: name
+            module: module
+            function: funcName
+            line: lineno
+            thread_name: threadName
+handlers:
+    stdout:
+        class: logging.StreamHandler
+        filters:
+            - non_error
+        formatter: standard
+        stream: ext://sys.stdout
+    stderr:
+        class: logging.StreamHandler
+        level: WARNING
+        formatter: standard
+        stream: ext://sys.stderr
+    file:
+        class: logging.handlers.RotatingFileHandler
+        level: DEBUG
+        formatter: json
+        filename: logs/log_history_cbam.jsonl
+        maxBytes: 5242880  # If file size exceeds 5MB, it will be rotated
+        backupCount: 40  # Keep 40 log files
+        encoding: utf8
+    queue_handler:
+        class: logging.handlers.QueueHandler
+        handlers:
+            - stdout
+            - stderr
+            - file
+        respect_handler_level: True
+loggers:
+    root:
+        level: DEBUG
+        handlers:
+            - queue_handler
